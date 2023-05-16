@@ -4,12 +4,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class Sign implements GameObject {
+public class Player implements GameObject {
+
     private Texture image;
     private Sprite sprite;
 
-    public Sign() {
-        image = new Texture("sign.png");
+    public Player(String img_file) {
+        image = new Texture(img_file);
         sprite = new Sprite(image);
     }
     @Override

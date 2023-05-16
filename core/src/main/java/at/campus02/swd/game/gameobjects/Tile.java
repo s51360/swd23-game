@@ -4,24 +4,25 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class Sign implements GameObject {
+public abstract class Tile implements GameObject {
+
     private Texture image;
     private Sprite sprite;
 
-    public Sign() {
-        image = new Texture("sign.png");
+    public Tile(String img_file) {
+        image = new Texture(img_file);
         sprite = new Sprite(image);
     }
-    @Override
-    public void act(float delta) {}
+
+    public Tile() {}
 
     @Override
-    public void setPosition(float x, float y) {
-        sprite.setPosition(x, y);
-    }
+    public abstract void act(float delta);
 
     @Override
-    public void draw(SpriteBatch batch) {
-        sprite.draw(batch);
-    }
+    public abstract void setPosition(float x, float y);
+
+    @Override
+    public abstract void draw(SpriteBatch batch);
+
 }

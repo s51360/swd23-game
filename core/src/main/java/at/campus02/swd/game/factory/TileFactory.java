@@ -1,9 +1,6 @@
-package at.campus02.swd.game;
+package at.campus02.swd.game.factory;
 
 import at.campus02.swd.game.gameobjects.*;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class TileFactory extends Factory {
     public TileFactory() {

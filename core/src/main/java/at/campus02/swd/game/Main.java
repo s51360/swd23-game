@@ -1,12 +1,12 @@
 package at.campus02.swd.game;
 
-import at.campus02.swd.game.gameobjects.Bush;
-import at.campus02.swd.game.gameobjects.Tile;
+import at.campus02.swd.game.factory.TileFactory;
+import at.campus02.swd.game.factory.TileType;
+import at.campus02.swd.game.gameobjects.Player;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
@@ -99,7 +99,12 @@ public class Main extends ApplicationAdapter {
             gameObject.draw(batch);
 		}
 
-		font.draw(batch, "Hello Game", 220, 220);
+        Player player = new Player();
+        player.setPosition(256,256);
+        player.draw(batch);
+
+//		font.draw(batch, "Hello Game", 220, 220);
+
 		batch.end();
 	}
 

@@ -9,8 +9,8 @@ public class Player implements GameObject {
     private Texture image;
     private Sprite sprite;
 
-    public Player(String img_file) {
-        image = new Texture(img_file);
+    public Player() {
+        image = new Texture("C:\\Projects\\02_Semester\\Software_Design\\assets\\sprites\\Ship parts\\hullSmall (1).png");
         sprite = new Sprite(image);
     }
     @Override

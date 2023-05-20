@@ -11,7 +11,7 @@ public class Bush extends Tile {
 
     public Bush() {
         super();
-        image = new Texture("tiles\\mapTile_001.png");
+        image = new Texture("tiles\\mapTile_017.png");
         sprite = new Sprite(image);
     }
 

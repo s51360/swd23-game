@@ -10,7 +10,7 @@ public class Grass extends Tile {
 
     public Grass() {
         super();
-        image = new Texture("tiles\\mapTile_007.png");
+        image = new Texture("tiles\\mapTile_022.png");
         sprite = new Sprite(image);
     }
 

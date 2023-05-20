@@ -99,6 +99,7 @@ public class Main extends ApplicationAdapter {
             gameObject.draw(batch);
 		}
 
+        // nur temporär, wenn wir den Spieler bewegen müssen, dann müssen wir dem die Struktur mitgeben - denke ich!
         Player player = new Player();
         player.setPosition(256,256);
         player.draw(batch);

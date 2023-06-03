@@ -4,6 +4,7 @@ import at.campus02.swd.game.factory.PlayerFactory;
 import at.campus02.swd.game.factory.TileFactory;
 import at.campus02.swd.game.factory.TileType;
 import at.campus02.swd.game.gameobjects.Player;
+import at.campus02.swd.game.input.*;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -15,7 +16,6 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 
 import at.campus02.swd.game.gameobjects.GameObject;
-import at.campus02.swd.game.input.GameInput;
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
 public class Main extends ApplicationAdapter {
@@ -123,43 +123,25 @@ public class Main extends ApplicationAdapter {
 			act(logicFrameTime);
 		}
 
-
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            if (player.getX() >= 128) {
-                player.setPosition((player.getX() - 200 * Gdx.graphics.getDeltaTime()), player.getY());
-            } else {
-                player.setPosition(128, player.getY());
-            }
+            MoveLeftCommand command = new MoveLeftCommand(player);
+            command.execute();
         }
 
         if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            if (player.getX() <= 470) {
-                player.setPosition((player.getX() + 200 * Gdx.graphics.getDeltaTime()), player.getY());
-            } else {
-                player.setPosition(470, player.getY());
-            }
+            MoveRightCommand command = new MoveRightCommand(player);
+            command.execute();
         }
 
         if(Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            if (player.getY() <= 404) {
-                player.setPosition(player.getX(), player.getY() + 200 * Gdx.graphics.getDeltaTime());
-            } else {
-                player.setPosition(player.getX(), 404);
-            }
+            MoveUpCommand command = new MoveUpCommand(player);
+            command.execute();
         }
 
         if(Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            if (player.getY() >= 128) {
-                player.setPosition(player.getX(), player.getY() - 200 * Gdx.graphics.getDeltaTime());
-            } else {
-                player.setPosition(player.getX(), 128);
-            }
+            MoveDownCommand command = new MoveDownCommand(player);
+            command.execute();
         }
-
-//ToDo: if Abfrage inkl. position ausrechnen auslagern, siehe Angabe
-//        if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-//            moveLeftCommand.execute();
-//        }
 
 		draw();
 	}

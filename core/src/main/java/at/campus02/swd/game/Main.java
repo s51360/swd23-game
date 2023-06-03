@@ -6,6 +6,7 @@ import at.campus02.swd.game.factory.TileType;
 import at.campus02.swd.game.gameobjects.Player;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -34,6 +35,7 @@ public class Main extends ApplicationAdapter {
 
     private TileFactory tileFactory = new TileFactory();
     private PlayerFactory playerFactory = new PlayerFactory();
+    private Player player;
 
 
     // Mit diesem zweidimensionales Array von TileType bauen wir unser Muster wie die Fläche aussehen könnte.
@@ -79,6 +81,7 @@ public class Main extends ApplicationAdapter {
         }
 
         GameObject p = playerFactory.create();
+        this.player = (Player) p;
         p.setPosition(256,256);
         gameObjects.add(p);
 
@@ -119,6 +122,45 @@ public class Main extends ApplicationAdapter {
 			deltaAccumulator -= logicFrameTime;
 			act(logicFrameTime);
 		}
+
+
+        if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+            if (player.getX() >= 128) {
+                player.setPosition((player.getX() - 200 * Gdx.graphics.getDeltaTime()), player.getY());
+            } else {
+                player.setPosition(128, player.getY());
+            }
+        }
+
+        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+            if (player.getX() <= 470) {
+                player.setPosition((player.getX() + 200 * Gdx.graphics.getDeltaTime()), player.getY());
+            } else {
+                player.setPosition(470, player.getY());
+            }
+        }
+
+        if(Gdx.input.isKeyPressed(Input.Keys.UP)) {
+            if (player.getY() <= 404) {
+                player.setPosition(player.getX(), player.getY() + 200 * Gdx.graphics.getDeltaTime());
+            } else {
+                player.setPosition(player.getX(), 404);
+            }
+        }
+
+        if(Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+            if (player.getY() >= 128) {
+                player.setPosition(player.getX(), player.getY() - 200 * Gdx.graphics.getDeltaTime());
+            } else {
+                player.setPosition(player.getX(), 128);
+            }
+        }
+
+//ToDo: if Abfrage inkl. position ausrechnen auslagern, siehe Angabe
+//        if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+//            moveLeftCommand.execute();
+//        }
+
 		draw();
 	}
 

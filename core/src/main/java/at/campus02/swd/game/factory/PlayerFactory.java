@@ -4,7 +4,7 @@ import at.campus02.swd.game.gameobjects.*;
 
 public class PlayerFactory extends Factory {
     public PlayerFactory() {
-        super(FactoryType.Tile);
+        super(FactoryType.Player);
     }
 
     @Override

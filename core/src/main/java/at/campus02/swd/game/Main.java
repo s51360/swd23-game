@@ -1,5 +1,6 @@
 package at.campus02.swd.game;
 
+import at.campus02.swd.game.factory.PlayerFactory;
 import at.campus02.swd.game.factory.TileFactory;
 import at.campus02.swd.game.factory.TileType;
 import at.campus02.swd.game.gameobjects.Player;
@@ -32,6 +33,7 @@ public class Main extends ApplicationAdapter {
 	private BitmapFont font;
 
     private TileFactory tileFactory = new TileFactory();
+    private PlayerFactory playerFactory = new PlayerFactory();
 
 
     // Mit diesem zweidimensionales Array von TileType bauen wir unser Muster wie die Fläche aussehen könnte.
@@ -76,6 +78,10 @@ public class Main extends ApplicationAdapter {
             }
         }
 
+        GameObject p = playerFactory.create();
+        p.setPosition(256,256);
+        gameObjects.add(p);
+
 		font = new BitmapFont();
 		font.setColor(Color.WHITE);
 		Gdx.input.setInputProcessor(this.gameInput);
@@ -98,13 +104,6 @@ public class Main extends ApplicationAdapter {
 		for(GameObject gameObject : gameObjects) {
             gameObject.draw(batch);
 		}
-
-        // nur temporär, wenn wir den Spieler bewegen müssen, dann müssen wir dem die Struktur mitgeben - denke ich!
-        Player player = new Player();
-        player.setPosition(256,256);
-        player.draw(batch);
-
-//		font.draw(batch, "Hello Game", 220, 220);
 
 		batch.end();
 	}

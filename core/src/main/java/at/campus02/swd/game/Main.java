@@ -7,6 +7,7 @@ import at.campus02.swd.game.gameobjects.Player;
 import at.campus02.swd.game.input.*;
 import at.campus02.swd.game.observer.ConsolePlayerObserver;
 import at.campus02.swd.game.observer.PlayerObserver;
+import at.campus02.swd.game.observer.UiPlayerObserver;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -41,7 +42,10 @@ public class Main extends ApplicationAdapter {
 
     private AssetRepository assetRepository = AssetRepository.getInstance();
 
-    private PlayerObserver observer = new ConsolePlayerObserver();
+    private PlayerObserver observerConsole = new ConsolePlayerObserver();
+
+    // wird zwar als observer aufgenommen, jedoch wird die Info im Screen nicht durch UiPlayerObserver ausgegeben
+    private PlayerObserver observerUI = new UiPlayerObserver();
 
 
     // Mit diesem zweidimensionales Array von TileType bauen wir unser Muster wie die Fläche aussehen könnte.
@@ -91,7 +95,11 @@ public class Main extends ApplicationAdapter {
         p.setPosition(256,256);
         gameObjects.add(p);
 
-        player.registerObserver(observer);
+        // erster Observer
+        player.registerObserver(observerConsole);
+
+        // zweiten Observer aufnehmen
+        player.registerObserver(observerUI);
 
 		font = new BitmapFont();
 		font.setColor(Color.WHITE);
@@ -115,6 +123,8 @@ public class Main extends ApplicationAdapter {
 		for(GameObject gameObject : gameObjects) {
             gameObject.draw(batch);
 		}
+
+        font.draw(batch, "Letzte Bewegung: " + player.getLastMovement(), 20, 20);
 
 		batch.end();
 	}

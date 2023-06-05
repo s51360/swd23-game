@@ -18,7 +18,9 @@ public class Player implements GameObject, PlayerObservable {
     private Sprite sprite2;
     private AssetRepository assetRepository = AssetRepository.getInstance();
 
-    private List<PlayerObserver> observers = new ArrayList<>();
+    private ArrayList<PlayerObserver> observers = new ArrayList<>();
+
+    private String lastMovement;
 
     public Player() {
         image = assetRepository.getTexture("sprites/Ship parts/hullSmall (1).png");
@@ -68,4 +70,13 @@ public class Player implements GameObject, PlayerObservable {
 //    public void notifyObservers() {
 //
 //    }
+
+
+    public String getLastMovement() {
+        return lastMovement;
+    }
+
+    public void setLastMovement(String lastMovement) {
+        this.lastMovement = lastMovement;
+    }
 }

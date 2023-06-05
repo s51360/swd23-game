@@ -1,5 +1,6 @@
 package at.campus02.swd.game.gameobjects;
 
+import at.campus02.swd.game.AssetRepository;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -10,12 +11,13 @@ public class Player implements GameObject {
     private Texture image2;
     private Sprite sprite;
     private Sprite sprite2;
+    private AssetRepository assetRepository = AssetRepository.getInstance();
 
     public Player() {
-        image = new Texture("sprites/Ship parts/hullSmall (1).png");
+        image = assetRepository.getTexture("sprites/Ship parts/hullSmall (1).png");
         sprite = new Sprite(image);
 
-        image2 = new Texture("sprites/Ship parts/sailLarge (2).png");
+        image2 = assetRepository.getTexture("sprites/Ship parts/sailLarge (2).png");
         sprite2 = new Sprite(image2);
     }
     @Override

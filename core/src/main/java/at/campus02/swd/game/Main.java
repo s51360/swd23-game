@@ -37,6 +37,8 @@ public class Main extends ApplicationAdapter {
     private PlayerFactory playerFactory = new PlayerFactory();
     private Player player;
 
+    private AssetRepository assetRepository = AssetRepository.getInstance();
+
 
     // Mit diesem zweidimensionales Array von TileType bauen wir unser Muster wie die Fläche aussehen könnte.
     // Mit den enum typen befüllen wir diese dann. Hier an der Stelle wird nur die Vorlage, befüllen passiert in der create() Methode.
@@ -149,6 +151,10 @@ public class Main extends ApplicationAdapter {
 	@Override
 	public void dispose() {
 		batch.dispose();
+
+        // .dispose aufrufen wenn die Ressourcen nicht mehr benötigt werden (z.B. wenn das Spiel beendet wird) um diese freizugeben.
+        // sollte sich die Szene ändern z.B. andere Map so gehört .dispose eigentlich dort aufgerufen wo sich die Map ändert (render?)
+        assetRepository.dispose();
 	}
 
 	@Override

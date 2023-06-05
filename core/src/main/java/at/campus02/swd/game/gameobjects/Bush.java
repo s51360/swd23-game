@@ -1,5 +1,6 @@
 package at.campus02.swd.game.gameobjects;
 
+import at.campus02.swd.game.AssetRepository;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -8,12 +9,14 @@ public class Bush extends Tile {
 
     private Texture image;
     private Sprite sprite;
+    private AssetRepository assetRepository = AssetRepository.getInstance();
 
     public Bush() {
         super();
-        image = new Texture("tiles\\mapTile_017.png");
+        image = assetRepository.getTexture("tiles\\mapTile_017.png");
         sprite = new Sprite(image);
     }
+
 
     @Override
     public void act(float delta) {}

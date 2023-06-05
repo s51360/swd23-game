@@ -1,5 +1,6 @@
 package at.campus02.swd.game.gameobjects;
 
+import at.campus02.swd.game.AssetRepository;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -7,10 +8,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class Grass extends Tile {
     private Texture image;
     private Sprite sprite;
+    private AssetRepository assetRepository = AssetRepository.getInstance();
 
     public Grass() {
         super();
-        image = new Texture("tiles\\mapTile_022.png");
+        image = assetRepository.getTexture("tiles\\mapTile_022.png");
         sprite = new Sprite(image);
     }
 

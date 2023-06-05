@@ -5,6 +5,8 @@ import at.campus02.swd.game.factory.TileFactory;
 import at.campus02.swd.game.factory.TileType;
 import at.campus02.swd.game.gameobjects.Player;
 import at.campus02.swd.game.input.*;
+import at.campus02.swd.game.observer.ConsolePlayerObserver;
+import at.campus02.swd.game.observer.PlayerObserver;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -38,6 +40,8 @@ public class Main extends ApplicationAdapter {
     private Player player;
 
     private AssetRepository assetRepository = AssetRepository.getInstance();
+
+    private PlayerObserver observer = new ConsolePlayerObserver();
 
 
     // Mit diesem zweidimensionales Array von TileType bauen wir unser Muster wie die Fläche aussehen könnte.
@@ -86,6 +90,8 @@ public class Main extends ApplicationAdapter {
         this.player = (Player) p;
         p.setPosition(256,256);
         gameObjects.add(p);
+
+        player.registerObserver(observer);
 
 		font = new BitmapFont();
 		font.setColor(Color.WHITE);

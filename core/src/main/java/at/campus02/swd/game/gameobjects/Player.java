@@ -1,17 +1,24 @@
 package at.campus02.swd.game.gameobjects;
 
 import at.campus02.swd.game.AssetRepository;
+import at.campus02.swd.game.observer.PlayerObservable;
+import at.campus02.swd.game.observer.PlayerObserver;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class Player implements GameObject {
+import java.util.ArrayList;
+import java.util.List;
+
+public class Player implements GameObject, PlayerObservable {
 
     private Texture image;
     private Texture image2;
     private Sprite sprite;
     private Sprite sprite2;
     private AssetRepository assetRepository = AssetRepository.getInstance();
+
+    private List<PlayerObserver> observers = new ArrayList<>();
 
     public Player() {
         image = assetRepository.getTexture("sprites/Ship parts/hullSmall (1).png");
@@ -37,10 +44,28 @@ public class Player implements GameObject {
         return sprite.getY();
     }
 
+    public List<PlayerObserver> getObservers() {
+        return observers;
+    }
 
     @Override
     public void draw(SpriteBatch batch) {
         sprite.draw(batch);
         sprite2.draw(batch);
     }
+
+    @Override
+    public void registerObserver(PlayerObserver observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void removeObserver(PlayerObserver observer) {
+        observers.remove(observer);
+    }
+
+//    @Override
+//    public void notifyObservers() {
+//
+//    }
 }

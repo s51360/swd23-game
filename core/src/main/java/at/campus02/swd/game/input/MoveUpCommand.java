@@ -23,7 +23,5 @@ public class MoveUpCommand implements Command {
         for (PlayerObserver observer : player.getObservers()) {
             observer.onPlayerMovedUp();
         }
-
-        player.setLastMovement("nach oben");
     }
 }

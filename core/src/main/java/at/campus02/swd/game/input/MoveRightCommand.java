@@ -23,7 +23,5 @@ public class MoveRightCommand implements Command {
         for (PlayerObserver observer : player.getObservers()) {
             observer.onPlayerMovedRight();
         }
-
-        player.setLastMovement("nach rechts");
     }
 }

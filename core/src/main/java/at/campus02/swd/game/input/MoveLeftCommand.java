@@ -24,7 +24,5 @@ public class MoveLeftCommand implements Command {
         for (PlayerObserver observer : player.getObservers()) {
             observer.onPlayerMovedLeft();
         }
-
-        player.setLastMovement("nach links");
     }
 }

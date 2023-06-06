@@ -24,7 +24,7 @@ import at.campus02.swd.game.gameobjects.GameObject;
 public class Main extends ApplicationAdapter {
 	private SpriteBatch batch;
 
-	private ExtendViewport viewport = new ExtendViewport(480.0f, 480.0f, 480.0f, 480.0f);
+//	private ExtendViewport viewport = new ExtendViewport(480.0f, 480.0f, 480.0f, 480.0f);
 	private GameInput gameInput = new GameInput();
 
 	private Array<GameObject> gameObjects = new Array<>();
@@ -40,12 +40,11 @@ public class Main extends ApplicationAdapter {
     private PlayerFactory playerFactory = new PlayerFactory();
     private Player player;
 
-    private AssetRepository assetRepository = AssetRepository.getInstance();
+    private AssetRepository assetRepository;
 
     private PlayerObserver observerConsole = new ConsolePlayerObserver();
 
-    // wird zwar als observer aufgenommen, jedoch wird die Info im Screen nicht durch UiPlayerObserver ausgegeben
-    private PlayerObserver observerUI = new UiPlayerObserver();
+    private PlayerObserver observerUI;
 
 
     // Mit diesem zweidimensionales Array von TileType bauen wir unser Muster wie die Fläche aussehen könnte.
@@ -67,8 +66,9 @@ public class Main extends ApplicationAdapter {
 	@Override
 	public void create() {
 		batch = new SpriteBatch();
+        assetRepository = AssetRepository.getInstance();
 
-        // erster Ansatz bevor jener unten umgestzt worden ist - zweckes Doku lasse ich noch drin!
+//        erster Ansatz bevor jener unten umgestzt worden ist - zweckes Doku lasse ich noch drin!
 
 //        for (int i = 0; i < 10; i++) {
 //            for (int j = 0; j < 10; j++) {
@@ -90,6 +90,10 @@ public class Main extends ApplicationAdapter {
             }
         }
 
+        font = new BitmapFont();
+        font.setColor(Color.WHITE);
+        Gdx.input.setInputProcessor(this.gameInput);
+
         GameObject p = playerFactory.create();
         this.player = (Player) p;
         p.setPosition(256,256);
@@ -98,13 +102,10 @@ public class Main extends ApplicationAdapter {
         // erster Observer
         player.registerObserver(observerConsole);
 
+        observerUI = new UiPlayerObserver(batch, font);
+
         // zweiten Observer aufnehmen
         player.registerObserver(observerUI);
-
-		font = new BitmapFont();
-		font.setColor(Color.WHITE);
-		Gdx.input.setInputProcessor(this.gameInput);
-
 	}
 
 	private void act(float delta) {
@@ -114,23 +115,18 @@ public class Main extends ApplicationAdapter {
 	}
 
 	private void draw() {
-
         // die Zeile 93 auskommentiert, da der viewport in der mitte, das kalkulieren und setzen der tiles erschwert!
-
-		//batch.setProjectionMatrix(viewport.getCamera().combined);
-		batch.begin();
+		// batch.setProjectionMatrix(viewport.getCamera().combined);
 
 		for(GameObject gameObject : gameObjects) {
             gameObject.draw(batch);
 		}
-
-        font.draw(batch, "Letzte Bewegung: " + player.getLastMovement(), 20, 20);
-
-		batch.end();
 	}
 
 	@Override
 	public void render() {
+        batch.begin();
+
 		Gdx.gl.glClearColor(0.15f, 0.15f, 0.2f, 1f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -140,6 +136,8 @@ public class Main extends ApplicationAdapter {
 			deltaAccumulator -= logicFrameTime;
 			act(logicFrameTime);
 		}
+
+        draw();
 
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
             MoveLeftCommand command = new MoveLeftCommand(player);
@@ -161,7 +159,7 @@ public class Main extends ApplicationAdapter {
             command.execute();
         }
 
-		draw();
+        batch.end();
 	}
 
 	@Override
@@ -175,6 +173,6 @@ public class Main extends ApplicationAdapter {
 
 	@Override
 	public void resize(int width, int height){
-		viewport.update(width,height);
+//		viewport.update(width,height);
 	}
 }

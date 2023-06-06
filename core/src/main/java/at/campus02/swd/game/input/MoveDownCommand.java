@@ -23,7 +23,5 @@ public class MoveDownCommand implements Command {
         for (PlayerObserver observer : player.getObservers()) {
             observer.onPlayerMovedDown();
         }
-
-        player.setLastMovement("nach unten");
     }
 }

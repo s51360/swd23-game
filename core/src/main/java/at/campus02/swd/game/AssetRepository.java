@@ -12,6 +12,9 @@ public class AssetRepository {
     private AssetRepository() {
         // Konstruktur private deklariert sodass außerhalb keine Instanziierung dieser Klasse möglich ist.
         // um AssetRepository jedoch zu verwenden greift man hier auf die Methode getInstance
+
+        // um die Tiles vorzuladen
+        preloadAssets();
     }
 
     public static AssetRepository getInstance() {
@@ -30,12 +33,14 @@ public class AssetRepository {
     }
 
     // preloadAssets() zwar implementiert aber wo macht dies Sinn genau aufzurufen??
-    public void preloadAssets() {
-        Texture bushTexture = getTexture("tiles\\mapTile_017.png");
-        Texture waterTexture = getTexture("tiles\\mapTile_188.png");
-        Texture grassTexture = getTexture("tiles\\mapTile_022.png");
-        Texture shipTexture = getTexture("sprites/Ship parts/hullSmall (1).png");
-        Texture sailTexture = getTexture("sprites/Ship parts/sailLarge (2).png");
+    private void preloadAssets() {
+        this.textureMap = new HashMap<String, Texture>() {{
+            put("tiles\\mapTile_017.png",new Texture("tiles\\mapTile_017.png"));
+            put("tiles\\mapTile_188.png",new Texture("tiles\\mapTile_188.png"));
+            put("tiles\\mapTile_022.png",new Texture("tiles\\mapTile_022.png"));
+            put("sprites/Ship parts/hullSmall (1).png",new Texture("sprites/Ship parts/hullSmall (1).png"));
+            put("sprites/Ship parts/sailLarge (2).png",new Texture("sprites/Ship parts/sailLarge (2).png"));
+        }};
     }
 
     public void dispose() {
@@ -43,5 +48,4 @@ public class AssetRepository {
             texture.dispose();
         }
     }
-
 }

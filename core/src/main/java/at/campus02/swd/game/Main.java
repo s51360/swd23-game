@@ -10,8 +10,7 @@ import at.campus02.swd.game.input.*;
 import at.campus02.swd.game.observer.ConsolePlayerObserver;
 import at.campus02.swd.game.observer.PlayerObserver;
 import at.campus02.swd.game.observer.UiPlayerObserver;
-import at.campus02.swd.game.strategy.PlayerBehaviorEnemyDefault;
-import at.campus02.swd.game.strategy.PlayerBehaviorStrategy;
+import at.campus02.swd.game.strategy.PlayerBehaviorStrategyDefault;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -45,8 +44,6 @@ public class Main extends ApplicationAdapter {
 
     private EnemyFactory enemyFactory = new EnemyFactory();
     private Enemy enemy;
-
-    private PlayerBehaviorEnemyDefault strategy_default;
 
     private AssetRepository assetRepository;
 
@@ -109,8 +106,8 @@ public class Main extends ApplicationAdapter {
 
         GameObject e = enemyFactory.create();
         this.enemy = (Enemy) e;
+        enemy.setStrategy(new PlayerBehaviorStrategyDefault(this.enemy));
         e.setPosition(156,156);
-        this.strategy_default = new PlayerBehaviorEnemyDefault(this.enemy);
         gameObjects.add(e);
 
         // erster Observer
@@ -126,6 +123,7 @@ public class Main extends ApplicationAdapter {
 		for(GameObject gameObject : gameObjects) {
 			gameObject.act(delta);
 		}
+        enemy.act(delta);
 	}
 
 	private void draw() {
@@ -156,48 +154,22 @@ public class Main extends ApplicationAdapter {
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
             MoveLeftCommand command = new MoveLeftCommand(player);
             command.execute();
-            // für enemy
-//            if (player.getX() >= enemy.getX()) {
-//                enemy.setPosition(enemy.getX() + 32, enemy.getY());
-//            } else {
-//                enemy.setPosition(enemy.getX() - 32, enemy.getY());
-//            }
         }
 
         if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
             MoveRightCommand command = new MoveRightCommand(player);
             command.execute();
-            // für enemy
-//            if (player.getX() >= enemy.getX()) {
-//                enemy.setPosition(enemy.getX() + 32, enemy.getY());
-//            } else {
-//                enemy.setPosition(enemy.getX() - 32, enemy.getY());
-//            }
         }
 
         if(Gdx.input.isKeyPressed(Input.Keys.UP)) {
             MoveUpCommand command = new MoveUpCommand(player);
             command.execute();
-            // für enemy
-//            if (player.getX() >= enemy.getX()) {
-//                enemy.setPosition(enemy.getX() + 32, enemy.getY());
-//            } else {
-//                enemy.setPosition(enemy.getX() - 32, enemy.getY());
-//            }
         }
 
         if(Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
             MoveDownCommand command = new MoveDownCommand(player);
             command.execute();
-            // für enemy
-//            if (player.getX() >= enemy.getX()) {
-//                enemy.setPosition(enemy.getX() + 32, enemy.getY());
-//            } else {
-//                enemy.setPosition(enemy.getX() - 32, enemy.getY());
-//            }
         }
-
-        strategy_default.move();
 
         batch.end();
 	}

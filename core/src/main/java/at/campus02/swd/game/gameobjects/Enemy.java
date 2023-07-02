@@ -14,8 +14,6 @@ public class Enemy implements GameObject {
 
     private PlayerBehaviorStrategy strategy;
 
-
-    // private attribute + constructor für strategie übernehmen
     public Enemy() {
         image = assetRepository.getTexture("sprites/mapTile_094.png");
         sprite = new Sprite(image);
@@ -27,7 +25,7 @@ public class Enemy implements GameObject {
 
     @Override
     public void act(float delta) {
-        //setPosition(getX(),getY());
+        strategy.move();
     }
 
     @Override
@@ -42,7 +40,6 @@ public class Enemy implements GameObject {
     public float getY() {
         return sprite.getY();
     }
-
 
     @Override
     public void draw(SpriteBatch batch) {

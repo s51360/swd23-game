@@ -1,21 +1,15 @@
 package at.campus02.swd.game.strategy;
 
 import at.campus02.swd.game.gameobjects.Enemy;
-import com.badlogic.gdx.Gdx;
 
 import java.util.Random;
 
-public class PlayerBehaviorEnemyDefault implements PlayerBehaviorStrategy {
+public class PlayerBehaviorStrategyDefault implements PlayerBehaviorStrategy {
 
     private Enemy enemy;
 
-    private float x;
-    private float y;
-
-    public PlayerBehaviorEnemyDefault(Enemy enemy) {
-        this.enemy = enemy;
-        this.x = enemy.getX();
-        this.y = enemy.getY();
+    public PlayerBehaviorStrategyDefault(Enemy e) {
+        this.enemy = e;
     }
 
     @Override
@@ -26,8 +20,6 @@ public class PlayerBehaviorEnemyDefault implements PlayerBehaviorStrategy {
 
         switch (direction) {
             case 0: // oben
-                //y -= 1;
-                //enemy.setPosition(enemy.getX(), enemy.getY() - 5);
                 if (enemy.getY() <= 404) {
                     enemy.setPosition(enemy.getX(), enemy.getY() + 15);
                 } else {
@@ -35,8 +27,6 @@ public class PlayerBehaviorEnemyDefault implements PlayerBehaviorStrategy {
                 }
                 break;
             case 1: // unten
-                //y += 1;
-                //enemy.setPosition(enemy.getX(),enemy.getY() + 5);
                 if (enemy.getY() >= 128) {
                     enemy.setPosition(enemy.getX(), enemy.getY() - 15);
                 } else {
@@ -44,8 +34,6 @@ public class PlayerBehaviorEnemyDefault implements PlayerBehaviorStrategy {
                 }
                 break;
             case 2: // links
-                //x -= 1;
-                //enemy.setPosition(enemy.getX() - 5,enemy.getY());
                 if (enemy.getX() >= 128) {
                     enemy.setPosition((enemy.getX() - 15), enemy.getY());
                 } else {
@@ -53,8 +41,6 @@ public class PlayerBehaviorEnemyDefault implements PlayerBehaviorStrategy {
                 }
                 break;
             case 3: // rechts
-                //x += 1;
-                //enemy.setPosition(enemy.getX() + 5,enemy.getY());
                 if (enemy.getX() <= 470) {
                     enemy.setPosition((enemy.getX() + 15), enemy.getY());
                 } else {
@@ -64,15 +50,5 @@ public class PlayerBehaviorEnemyDefault implements PlayerBehaviorStrategy {
             default:
                 break;
         }
-//        x = Math.max(0, Math.min(x, 9));
-//        y = Math.max(0, Math.min(y, 9));
-    }
-
-    public float getX() {
-        return x;
-    }
-
-    public float getY() {
-        return y;
     }
 }

@@ -1,13 +1,17 @@
 package at.campus02.swd.game;
 
+import at.campus02.swd.game.factory.EnemyFactory;
 import at.campus02.swd.game.factory.PlayerFactory;
 import at.campus02.swd.game.factory.TileFactory;
 import at.campus02.swd.game.factory.TileType;
+import at.campus02.swd.game.gameobjects.Enemy;
 import at.campus02.swd.game.gameobjects.Player;
 import at.campus02.swd.game.input.*;
 import at.campus02.swd.game.observer.ConsolePlayerObserver;
 import at.campus02.swd.game.observer.PlayerObserver;
 import at.campus02.swd.game.observer.UiPlayerObserver;
+import at.campus02.swd.game.strategy.PlayerBehaviorEnemyDefault;
+import at.campus02.swd.game.strategy.PlayerBehaviorStrategy;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -16,7 +20,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.viewport.ExtendViewport;
 
 import at.campus02.swd.game.gameobjects.GameObject;
 
@@ -39,6 +42,11 @@ public class Main extends ApplicationAdapter {
     private TileFactory tileFactory = new TileFactory();
     private PlayerFactory playerFactory = new PlayerFactory();
     private Player player;
+
+    private EnemyFactory enemyFactory = new EnemyFactory();
+    private Enemy enemy;
+
+    private PlayerBehaviorEnemyDefault strategy_default;
 
     private AssetRepository assetRepository;
 
@@ -99,6 +107,12 @@ public class Main extends ApplicationAdapter {
         p.setPosition(256,256);
         gameObjects.add(p);
 
+        GameObject e = enemyFactory.create();
+        this.enemy = (Enemy) e;
+        e.setPosition(156,156);
+        this.strategy_default = new PlayerBehaviorEnemyDefault(this.enemy);
+        gameObjects.add(e);
+
         // erster Observer
         player.registerObserver(observerConsole);
 
@@ -142,22 +156,48 @@ public class Main extends ApplicationAdapter {
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
             MoveLeftCommand command = new MoveLeftCommand(player);
             command.execute();
+            // für enemy
+//            if (player.getX() >= enemy.getX()) {
+//                enemy.setPosition(enemy.getX() + 32, enemy.getY());
+//            } else {
+//                enemy.setPosition(enemy.getX() - 32, enemy.getY());
+//            }
         }
 
         if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
             MoveRightCommand command = new MoveRightCommand(player);
             command.execute();
+            // für enemy
+//            if (player.getX() >= enemy.getX()) {
+//                enemy.setPosition(enemy.getX() + 32, enemy.getY());
+//            } else {
+//                enemy.setPosition(enemy.getX() - 32, enemy.getY());
+//            }
         }
 
         if(Gdx.input.isKeyPressed(Input.Keys.UP)) {
             MoveUpCommand command = new MoveUpCommand(player);
             command.execute();
+            // für enemy
+//            if (player.getX() >= enemy.getX()) {
+//                enemy.setPosition(enemy.getX() + 32, enemy.getY());
+//            } else {
+//                enemy.setPosition(enemy.getX() - 32, enemy.getY());
+//            }
         }
 
         if(Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
             MoveDownCommand command = new MoveDownCommand(player);
             command.execute();
+            // für enemy
+//            if (player.getX() >= enemy.getX()) {
+//                enemy.setPosition(enemy.getX() + 32, enemy.getY());
+//            } else {
+//                enemy.setPosition(enemy.getX() - 32, enemy.getY());
+//            }
         }
+
+        strategy_default.move();
 
         batch.end();
 	}

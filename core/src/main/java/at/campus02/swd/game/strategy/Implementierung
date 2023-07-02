@@ -1,0 +1,56 @@
+Klasse Player kopieren und einen "Enemy" bauen
+-> die Methode "act" im Enemy so bauen dass beim bewegen(?) diese aktualisiert wird, sprich "setPosition" aufrufen
+->
+
+
+    // ****************************************************************************************************************************************
+    // ToDo: mind. 2 verschiedene Arten und Weisen
+    // 1. weglaufen
+    // 2. angreifen
+    // 3. patroulieren
+
+    // Todo: overall
+    // 1. ein Client/Player wählt die Strategie anhand von Lebenspunkte und Abstand aus
+
+    // ****************************************************************************************************************************************
+
+    // ToDo: Strategie: weglaufen -> Sicht vom Gegner
+    // 1. wenn "Health" < 30% -> dann läuft der Gegner weg
+    // 2. wenn Abstand >= zwei Felder, dann bekommt der Gegner ein HP (lebenspunkte) Erhöhung von +1 (was auch immer einheit)
+    // 3. wenn er nicht in der Angriffsreichweite ist und 100 an HP hat -> dann zu Strategie patroulieren
+
+    // ToDo: Strategie: angreifen -> Sicht vom Gegner
+    // 1. ab einer gewissen HP bzw. Abstand, wechselt er (NPC) in den Angriff
+    // 2. auf den spieler zu fahren
+    // 3. wenn abstand gleich 1 Feld (dann keine bewegung mehr, also move wird nicht mehr aufgerufen)
+    // 4. dann greift NPC Spieler an -> dabei verliert der Spieler an Lebenspunkte, z.B. alle 3sek 10 einheiten
+
+    // ToDo: Strategie: patroulieren -> Sicht vom Gegner
+    // 1. fährt eine bestimmte route auf und ab
+
+    // ****************************************************************************************************************************************
+
+    // ToDo: TBD!
+    // weg laufen - ist was?
+    // ToDo: Antwort: Abstand vergrößern, sprich meine Position(jene vom NPC) um die aktuelle Position vom Player (nicht NPC) + >=2 Felder move'n
+
+    // health -> wie verringert bzw. erhöht sich dies?
+    // ToDo:
+    //  verringern: wenn 3sek in der nähe dann verlieren wir 10 einheiten an Lebenspunkte, wir haben max 100.
+    //  erhöhen: wenn wir weg laufen (siehe Strategie weglaufen) dann bekommen wir Punkte dazu, auch hier max 100.
+
+    // wissen wir wo aktuell unser Schiff liegt?? FIT: wissen nicht da wir nicht merken, könnten aber durchaus speichern; Christoph: Mathematisch ausrechnen
+    // ToDo:
+    //  Matrix ist fix vorgegeben, bei jeder Bewegung könnten wir die MatrixPosition mitloggen.
+    //  Berechnung: ??
+
+    // ****************************************************************************************************************************************
+    // ToDo: Technische Umsetzung
+    //  1. Player um das Attribute "health" erweitern;
+    //  2. Player sollte auch Time mittracken sodass lebenpunkte verringert werden können
+    //  3. Position bekommen wir mit getX und getY von der Player klasse zurück
+
+
+
+
+    // patroulieren, sollte hardcoded funktionieren

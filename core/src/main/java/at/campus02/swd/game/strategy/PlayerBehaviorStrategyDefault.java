@@ -16,7 +16,7 @@ public class PlayerBehaviorStrategyDefault implements PlayerBehaviorStrategy {
     public void move() {
 
         Random random = new Random();
-        int direction = random.nextInt(4); // 0: oben, 1: unten, 2: links, 3: rechts
+        int direction = random.nextInt(100); // 0: oben, 1: unten, 2: links, 3: rechts
 
         switch (direction) {
             case 0: // oben

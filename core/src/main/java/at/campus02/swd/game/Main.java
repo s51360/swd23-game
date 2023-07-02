@@ -44,6 +44,7 @@ public class Main extends ApplicationAdapter {
 
     private EnemyFactory enemyFactory = new EnemyFactory();
     private Enemy enemy;
+    private Enemy enemy2;
 
     private AssetRepository assetRepository;
 
@@ -110,6 +111,12 @@ public class Main extends ApplicationAdapter {
         e.setPosition(156,156);
         gameObjects.add(e);
 
+        GameObject e2 = enemyFactory.create();
+        this.enemy2 = (Enemy) e2;
+        enemy2.setStrategy(new PlayerBehaviorStrategyDefault(this.enemy2));
+        e2.setPosition(456,456);
+        gameObjects.add(e2);
+
         // erster Observer
         player.registerObserver(observerConsole);
 
@@ -124,6 +131,7 @@ public class Main extends ApplicationAdapter {
 			gameObject.act(delta);
 		}
         enemy.act(delta);
+        enemy2.act(delta);
 	}
 
 	private void draw() {

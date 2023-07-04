@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Player implements GameObject, PlayerObservable {
 
@@ -34,6 +33,8 @@ public class Player implements GameObject, PlayerObservable {
 
     @Override
     public void setPosition(float x, float y) {
+        notifyObservers(x, y);
+
         sprite.setPosition(x, y);
         sprite2.setPosition(x-13, y+20);
     }
@@ -44,10 +45,6 @@ public class Player implements GameObject, PlayerObservable {
 
     public float getY() {
         return sprite.getY();
-    }
-
-    public List<PlayerObserver> getObservers() {
-        return observers;
     }
 
     @Override
@@ -66,11 +63,20 @@ public class Player implements GameObject, PlayerObservable {
         observers.remove(observer);
     }
 
-//    @Override
-//    public void notifyObservers() {
-//
-//    }
+    @Override
+    public void notifyObservers(float x, float y) {
+        if (x < getX()) {
+            observers.forEach(o -> o.onPlayerMovedLeft());
+        } else if (x > getX()) {
+            observers.forEach(o -> o.onPlayerMovedRight());
+        }
 
+        if (y < getY()) {
+            observers.forEach(o -> o.onPlayerMovedDown());
+        } else if (y > getY()) {
+            observers.forEach(o -> o.onPlayerMovedUp());
+        }
+    }
 
     public String getLastMovement() {
         return lastMovement;

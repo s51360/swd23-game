@@ -20,9 +20,5 @@ public class MoveLeftCommand implements Command {
         } else {
             player.setPosition(128, player.getY());
         }
-
-        for (PlayerObserver observer : player.getObservers()) {
-            observer.onPlayerMovedLeft();
-        }
     }
 }

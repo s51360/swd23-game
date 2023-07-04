@@ -19,9 +19,5 @@ public class MoveRightCommand implements Command {
         } else {
             player.setPosition(470, player.getY());
         }
-
-        for (PlayerObserver observer : player.getObservers()) {
-            observer.onPlayerMovedRight();
-        }
     }
 }

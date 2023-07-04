@@ -19,9 +19,5 @@ public class MoveUpCommand implements Command {
         } else {
             player.setPosition(player.getX(), 404);
         }
-
-        for (PlayerObserver observer : player.getObservers()) {
-            observer.onPlayerMovedUp();
-        }
     }
 }

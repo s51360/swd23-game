@@ -6,6 +6,5 @@ public interface PlayerObservable {
     // ToDo: Wo genau die removeObserver aufrufen??
     void removeObserver(PlayerObserver observer);
 
-    // ToDo: eventuell über eine BenachrichtigeAlleObserver Methode zu implementieren??
-    // void notifyObservers();
+    void notifyObservers(float x, float y);
 }

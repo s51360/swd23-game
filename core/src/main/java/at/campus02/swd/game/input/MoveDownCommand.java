@@ -19,9 +19,5 @@ public class MoveDownCommand implements Command {
         } else {
             player.setPosition(player.getX(), 128);
         }
-
-        for (PlayerObserver observer : player.getObservers()) {
-            observer.onPlayerMovedDown();
-        }
     }
 }

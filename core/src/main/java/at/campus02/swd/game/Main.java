@@ -11,6 +11,7 @@ import at.campus02.swd.game.observer.ConsolePlayerObserver;
 import at.campus02.swd.game.observer.PlayerObserver;
 import at.campus02.swd.game.observer.UiPlayerObserver;
 import at.campus02.swd.game.strategy.PlayerBehaviorStrategyDefault;
+import at.campus02.swd.game.strategy.PlayerBehaviorStrategyPatrouillieren;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -177,6 +178,18 @@ public class Main extends ApplicationAdapter {
         if(Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
             MoveDownCommand command = new MoveDownCommand(player);
             command.execute();
+        }
+
+        // D für Default
+        if(Gdx.input.isKeyPressed(Input.Keys.D)) {
+            enemy.setStrategy(new PlayerBehaviorStrategyDefault(enemy));
+            enemy2.setStrategy(new PlayerBehaviorStrategyDefault(enemy2));
+        }
+
+        // P für Patrouillieren
+        if(Gdx.input.isKeyPressed(Input.Keys.P)) {
+            enemy.setStrategy(new PlayerBehaviorStrategyPatrouillieren(enemy));
+            enemy2.setStrategy(new PlayerBehaviorStrategyPatrouillieren(enemy2));
         }
 
         batch.end();
